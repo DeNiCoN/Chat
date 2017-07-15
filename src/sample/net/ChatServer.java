@@ -30,6 +30,15 @@ public class ChatServer {
                     if (name == null) return;
                     name = name.trim();
                     if (name.length() == 0) return;
+                    for (Connection c1: server.getConnections()
+                         ) {
+                        if (c1 != connection && ((ChatConnection)c1).name.equalsIgnoreCase(name)) {
+                            Packets.Kick kick = new Packets.Kick();
+                            kick.reason = "User with this name already in the server";
+                            server.sendToTCP(connection.getID(), kick);
+                            return;
+                        }
+                    }
                     connection.name = name;
                     Packets.ConsoleMessage consoleMessage1 = new Packets.ConsoleMessage();
                     try {

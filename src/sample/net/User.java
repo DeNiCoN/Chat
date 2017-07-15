@@ -3,8 +3,10 @@ package sample.net;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import sample.Main;
@@ -52,11 +54,16 @@ public class User {
                     Main.getInstance().exit(kick.reason);
                 }
                 if (object instanceof Packets.UpdateNames) {
-                    ListView<String> usersList = ((ListView<String>) Main.getInstance().root.getScene().lookup("#usersList"));
-                    ObservableList<String> list = FXCollections.observableArrayList();
-                    list.setAll(((Packets.UpdateNames)object).names);
-                    usersList.setItems(list);
-                    usersList.refresh();
+                    Platform.runLater(new Runnable(){
+                        @Override
+                        public void run() {
+                            ListView<String> usersList = ((ListView<String>) Main.getInstance().root.getScene().lookup("#usersList"));
+                            ObservableList<String> list = FXCollections.observableArrayList();
+                            list.setAll(((Packets.UpdateNames)object).names);
+                            usersList.setItems(list);
+                            usersList.refresh();
+                        }
+                    });
                 }
             }
         });

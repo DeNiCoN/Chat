@@ -3,6 +3,7 @@ package sample;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -66,9 +67,7 @@ public class Main extends Application {
     @Override
     public void stop() throws Exception {
         running = false;
-        if (chatServer != null && chatServer.server != null) {
-            chatServer.server.stop();
-        }
+        exit("");
         super.stop();
     }
     public void exit(String reason) {
@@ -77,6 +76,13 @@ public class Main extends Application {
         root.getSelectionModel().getSelectedItem().setDisable(true);
         root.getSelectionModel().select(root.getSelectionModel().getSelectedIndex() - 1);
         root.getSelectionModel().getSelectedItem().setDisable(false);
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                Label exceptionLabel = ((Label) Main.getInstance().root.getScene().lookup("#exceptionLabel"));
+                exceptionLabel.setText(reason);
+            }
+        });
         if (user != null && user.client != null) {
             user.client.stop();
         }
@@ -86,7 +92,5 @@ public class Main extends Application {
             chatServer.server.sendToAllTCP(kick);
             chatServer.server.stop();
         }
-        Label exceptionLabel = ((Label) Main.getInstance().root.getScene().lookup("#exceptionLabel"));
-        exceptionLabel.setText(reason);
     }
 }
