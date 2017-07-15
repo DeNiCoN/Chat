@@ -18,7 +18,7 @@
                <children>
                   <Button fx:id="host" layoutX="99.0" layoutY="170.0" mnemonicParsing="false" onAction="#onHost" prefHeight="25.0" prefWidth="49.0" text="Host" />
                   <Button fx:id="join" layoutX="675.0" layoutY="170.0" mnemonicParsing="false" onAction="#onJoin" text="Join" />
-                  <Button fx:id="servers" disable="true" layoutX="373.0" layoutY="219.0" mnemonicParsing="false" text="Servers" />
+                  <Button fx:id="servers" disable="true" layoutX="373.0" layoutY="219.0" mnemonicParsing="false" text="Servers" visible="false" />
                   <TextField fx:id="port" layoutX="620.0" layoutY="132.0" />
                   <TextField fx:id="ip" layoutX="620.0" layoutY="101.0" />
                   <Label layoutX="591.0" layoutY="105.0" text="Ip:" />
@@ -42,11 +42,11 @@
                   <ListView fx:id="usersList" layoutX="586.0" layoutY="407.0" onEditCommit="#onTextEdit" prefHeight="111.0" prefWidth="200.0" />
                   <Label layoutX="586.0" layoutY="390.0" prefHeight="17.0" prefWidth="200.0" text="Users" />
                   <TextArea fx:id="chat" layoutX="14.0" layoutY="23.0" onKeyReleased="#onTextEdit" prefHeight="533.0" prefWidth="561.0" />
-                  <ProgressBar layoutX="586.0" layoutY="366.0" prefWidth="200.0" progress="0.0" />
-                  <Button layoutX="586.0" layoutY="334.0" mnemonicParsing="false" text="Commit" />
-                  <Button layoutX="715.0" layoutY="334.0" mnemonicParsing="false" text="Download" />
-                  <ListView layoutX="586.0" layoutY="212.0" prefHeight="111.0" prefWidth="200.0" />
-                  <Label layoutX="586.0" layoutY="195.0" text="Files" />
+                  <ProgressBar layoutX="586.0" layoutY="366.0" prefWidth="200.0" progress="0.0" visible="false" />
+                  <Button layoutX="586.0" layoutY="334.0" mnemonicParsing="false" text="Commit" visible="false" />
+                  <Button layoutX="715.0" layoutY="334.0" mnemonicParsing="false" text="Download" visible="false" />
+                  <ListView layoutX="586.0" layoutY="212.0" prefHeight="111.0" prefWidth="200.0" visible="false" />
+                  <Label layoutX="586.0" layoutY="195.0" text="Files" visible="false" />
                </children></AnchorPane>
       </content>
     </Tab>
